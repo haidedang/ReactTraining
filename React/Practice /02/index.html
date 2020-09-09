@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <!-- Loading javascript functions which I am able to use. The order also plays a role. since it fetches sequentially.-->
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <!-- This lets me use ES6 syntax ? Using class and stuff.  -->
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="container"> </div>
+    <script type="text/babel">
+    /* Wiederverwendbare Component.  */
+        var Button = function(props) {
+            return (
+                <button onClick = {props.onClick}> {props.text}</button>
+            )
+        }
+
+        class Counter extends React.Component {
+            constructor (props){ 
+                super(props); 
+                this.state = {
+                    clicks: 0  
+                }
+                this.increment= this.increment.bind(this); 
+            }
+
+            increment() { 
+                this.setState({
+                    clicks: this.state.clicks + 1
+                })
+            }
+                
+            render() {
+                return (
+                    <div>
+                        <p>This was clicked {this.state.clicks}</p>
+                        <Button text="click me" onClick = {this.increment} />
+                    </div> 
+
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Counter />,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+
+</html>
